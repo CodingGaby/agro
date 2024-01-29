@@ -22,7 +22,9 @@ namespace Agro.web.Controllers
         // GET: Cities
         public async Task<IActionResult> Index()
         {
-            return View(await _context.cities.ToListAsync());
+            return _context.Cities != null ?                
+                View(await _context.Cities.ToListAsync ()) //Regresa una lista
+                : Problem("Entity set 'DataContext.Cities' is null");
         }
 
         // GET: Cities/Details/5
@@ -33,7 +35,7 @@ namespace Agro.web.Controllers
                 return NotFound();
             }
 
-            var city = await _context.cities
+            var city = await _context.Cities
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (city == null)
             {
@@ -73,7 +75,7 @@ namespace Agro.web.Controllers
                 return NotFound();
             }
 
-            var city = await _context.cities.FindAsync(id);
+            var city = await _context.Cities.FindAsync(id);
             if (city == null)
             {
                 return NotFound();
@@ -124,7 +126,7 @@ namespace Agro.web.Controllers
                 return NotFound();
             }
 
-            var city = await _context.cities
+            var city = await _context.Cities
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (city == null)
             {
@@ -139,10 +141,10 @@ namespace Agro.web.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var city = await _context.cities.FindAsync(id);
+            var city = await _context.Cities.FindAsync(id);
             if (city != null)
             {
-                _context.cities.Remove(city);
+                _context.Cities.Remove(city);
             }
 
             await _context.SaveChangesAsync();
@@ -151,7 +153,7 @@ namespace Agro.web.Controllers
 
         private bool CityExists(int id)
         {
-            return _context.cities.Any(e => e.Id == id);
+            return _context.Cities.Any(e => e.Id == id);
         }
     }
 }

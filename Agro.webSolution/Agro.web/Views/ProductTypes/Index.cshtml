@@ -1,0 +1,38 @@
+﻿@model IEnumerable<Agro.web.Data.Entities.ProductType>
+
+@{
+    ViewData["Title"] = "Tipos de productos";
+}
+
+<h1>Tipos de productos</h1>
+
+<p>
+    <button>
+        <a asp-action="Create">Agregar</a>
+    </button>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id">Editar</a> |
+                    <a asp-action="Details" asp-route-id="@item.Id">Detalles</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id">Borrar</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

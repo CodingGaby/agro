@@ -39,7 +39,30 @@ namespace Agro.web.Migrations
                     b.HasIndex("Name")
                         .IsUnique();
 
-                    b.ToTable("cities");
+                    b.ToTable("Cities");
+                });
+
+            modelBuilder.Entity("Agro.web.Data.Entities.ProductType", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ProductTypes");
                 });
 #pragma warning restore 612, 618
         }
